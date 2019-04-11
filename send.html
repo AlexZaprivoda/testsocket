@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <style>
+        body {
+            background-color: red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        textarea {
+            width: 80vw;
+            height: 80vh;
+            resize: none;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea id="inputF"></textarea>
+    <script defer>
+        var socket = io("http://localhost:3000");
+        socket.on("who?", function (data) {
+            socket.emit('name', { name: 'send' });
+        });
+
+        inputF.addEventListener("input", ({ target }) => {
+            // console.log(target.value)
+            socket.emit("input", {
+                text: target.value
+            });
+        })
+        // var socket = io('http://localhost:3000');
+        // socket.on('news', function (data) {
+        //     console.log(data);
+        //     socket.emit('my other event', { my: 'data' });
+        // });
+    </script>
+</body>
+
+</html>
